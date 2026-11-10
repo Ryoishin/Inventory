@@ -1,0 +1,21 @@
+export const config = {
+  name: 'Shivansh Raghuvanshi',
+  roles: ['Software Developer', 'Python Developer', 'Web Developer', 'Technology Enthusiast'],
+  github: 'Ryoishin',
+  githubUrl: 'https://github.com/Ryoishin',
+  githubRepository: import.meta.env.VITE_GITHUB_REPOSITORY || 'Ryoishin/Shivansh',
+  verifiedCredentials: [] as { title: string; issuer: string; url: string }[],
+  linkedinUrl: import.meta.env.VITE_LINKEDIN_URL || 'https://www.linkedin.com/in/shivansh-raghuvanshi09',
+  email: import.meta.env.VITE_CONTACT_EMAIL || 'shivanshraghuvanshi19@gmail.com',
+  profileImage: import.meta.env.VITE_PROFILE_IMAGE || '',
+  apiUrl: import.meta.env.VITE_API_URL || 'http://localhost:8000',
+  about: 'I enjoy building practical software solutions, exploring emerging technologies, and transforming ideas into useful digital experiences.',
+  skills: {
+    Programming: ['Python', 'C++', 'JavaScript'],
+    Frontend: ['HTML', 'CSS', 'JavaScript', 'React.js'],
+    Backend: ['Python', 'Flask', 'FastAPI'],
+    Database: ['SQL', 'MySQL'],
+    'Data Analytics': ['Pandas', 'NumPy', 'Power BI'],
+    Other: ['Git', 'GitHub', 'Software Testing', 'Debugging', 'Cybersecurity Fundamentals'],
+  },
+};

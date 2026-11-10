@@ -1,0 +1,1 @@
+.not-found{min-height:85vh;display:flex;align-items:flex-start;justify-content:center;flex-direction:column;width:min(800px,calc(100% - 48px));margin:auto}.not-found h1{font:800 clamp(44px,8vw,76px)/1.05 var(--heading);letter-spacing:-4px;margin:20px 0}.not-found h1 span{color:var(--blue)}.not-found p{color:var(--muted);font-size:14px;margin:0 0 25px}
