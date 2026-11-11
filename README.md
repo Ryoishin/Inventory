@@ -4,7 +4,7 @@ A responsive React/TypeScript portfolio with a FastAPI backend. It combines live
 
 ## Requirements
 
-- Node.js 20+ and npm
+- Node.js 22.12+ and npm (Node 24 recommended)
 - Python 3.10+
 - Optional OpenAI API key for EIVA
 - Optional SMTP credentials for contact delivery
@@ -12,10 +12,10 @@ A responsive React/TypeScript portfolio with a FastAPI backend. It combines live
 
 ## Run locally
 
-1. Install frontend dependencies: `npm install`.
+1. Install frontend dependencies from the lockfile: `npm ci`.
 2. Copy `.env.example` to `.env` and set any available public profile details.
 3. Run `npm run dev` from the project root.
-4. In a second terminal, enter `backend`, create and activate a virtual environment, then run `pip install -r requirements.txt`.
+4. In a second terminal, enter `backend`, create and activate a virtual environment, then run `pip install -r requirements-dev.txt`.
 5. Copy `backend/.env.example` to `backend/.env`. Configure `OPENAI_API_KEY` and `GITHUB_REPOSITORY=owner/repository` if available.
 6. From `backend/`, run `uvicorn main:app --reload --port 8000`.
 
@@ -23,14 +23,14 @@ Frontend: http://localhost:5173. API health: http://localhost:8000/api/health. O
 
 ## Engineering modules
 
-- **Recruiter mode:** concise experience/education/skills view, browser speech synthesis overview, downloadable HTML resume, and browser print-to-PDF.
+- **Recruiter mode:** concise experience/education/skills view, browser speech synthesis overview, downloadable PDF resume, and browser print-to-PDF.
 - **EIVA:** portfolio assistant, mock interview, and repository explanation. The backend requires `OPENAI_API_KEY`; explanations only use selected public repository metadata.
 - **GitHub:** live public repositories, repository language metadata, and recent events from the public Events API. Events are not a complete contribution graph.
 - **Live demos:** links only to HTTPS deployment URLs listed in real public repository metadata. Empty state appears when there are no deployment URLs.
 - **Architecture map:** interactive overview of the browser, GitHub, FastAPI, SQLite, OpenAI, SMTP, and Actions connections used by this portfolio.
 - **SQL playground:** fresh in-memory SQLite database per request. It contains fictional tutorial rows in `sample_products` and `sample_orders`, allows read-only `SELECT`/`WITH`, limits results to 100 rows, and stops long-running queries after 350 ms.
 - **REST explorer:** loads the running FastAPI OpenAPI schema and links to Swagger UI at `/docs`.
-- **Testing/CI:** `.github/workflows/ci.yml` runs the backend pytest suite and frontend production build. The dashboard fetches actual workflow and job status from GitHub Actions. It shows no runs until this workflow has been pushed to the configured repository and executed.
+- **Testing/CI:** GitHub Actions runs backend pytest and pip-audit checks, frontend type checking, npm audit, and a production build. `.github/workflows/refactoring.yml` runs the same focused checks for changes to application code. The dashboard fetches actual workflow and job status from GitHub Actions.
 - **Cybersecurity demo:** a real parameterized SQL lookup against the fictional sample database. The injection test string is treated as data; no vulnerable query is executed.
 - **Problem solving:** executes binary search against the entered sorted integer list and reports measured comparisons alongside O(log n) time and O(1) space.
 - **Analytics:** downloads the public Iris CSV from the seaborn-data repository and computes species counts and mean petal length from the downloaded rows. No cached/fabricated metrics are displayed.
@@ -38,7 +38,7 @@ Frontend: http://localhost:5173. API health: http://localhost:8000/api/health. O
 
 ## Tests
 
-From `backend/`, install requirements and run `python -m pytest -q`. The current suite covers health, SQL read-only restrictions and extension loading, safe parameterized lookup behavior, missing AI credentials, and an unconfigured CI state. GitHub Actions runs these checks on pushes and pull requests.
+From `backend/`, install `requirements-dev.txt`, then run `python -m pytest -q` and `python -m pip_audit -r requirements.txt`. The tests cover health, CORS, SQL read-only restrictions, safe parameterized lookup behavior, missing AI credentials, CI status handling, and rate-limit cleanup. GitHub Actions runs these checks on pushes and pull requests.
 
 ## Configuration
 
@@ -47,7 +47,7 @@ Frontend public configuration is in `src/config.ts`. Optional `.env` values incl
 Backend configuration lives in `backend/.env`:
 
 - `OPENAI_API_KEY` and `OPENAI_MODEL` for EIVA (model defaults to `gpt-4o-mini`).
-- `GITHUB_REPOSITORY=owner/repository` to read the latest `.github/workflows/ci.yml` run and job results. It defaults to the verified public portfolio repository `Ryoishin/Shivansh`; override it if this code is published elsewhere. `GITHUB_TOKEN` is optional and backend-only.
+- `GITHUB_REPOSITORY=owner/repository` to read the latest `.github/workflows/ci.yml` run and job results. It defaults to the verified public portfolio repository `Ryoishin/Inventory`; override it if this code is published elsewhere. `GITHUB_TOKEN` is optional and backend-only.
 - `CONTACT_EMAIL`, `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`, and `SMTP_FROM` to deliver contact form messages.
 - `FRONTEND_ORIGIN` for the allowed CORS origin list.
 
