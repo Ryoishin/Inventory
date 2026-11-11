@@ -4,5 +4,6 @@ import App from './App';
 import './styles.css';
 import './not-found.css';
 import './features.css';
+import './github-stats.css';
 import './showcase.css';
 createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>);

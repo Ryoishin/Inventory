@@ -1,0 +1,155 @@
+.github-stats-section {
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.github-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.github-stat-card {
+  min-height: 132px;
+  padding: 17px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 100% 0, #82a9ff0b, transparent 48%),
+    var(--surface);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.github-stat-card:hover {
+  transform: translateY(-3px);
+  border-color: #82a9ff40;
+  box-shadow: 0 12px 30px #0002;
+}
+
+.github-stat-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.github-stat-label svg {
+  flex: 0 0 auto;
+  color: var(--violet);
+}
+
+.github-stat-card strong {
+  display: block;
+  margin: 15px 0 5px;
+  color: var(--text);
+  font: 700 clamp(22px, 2.2vw, 29px)/1 var(--heading);
+  letter-spacing: -1px;
+  font-variant-numeric: tabular-nums;
+}
+
+.github-stat-detail {
+  color: var(--faint);
+  font: 9px var(--mono);
+}
+
+.github-stats-note {
+  margin: 13px 0 0;
+  color: var(--faint);
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.github-stats-note.is-stale {
+  color: #e7bd72;
+}
+
+.github-stats-retry {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 0 28px;
+}
+
+.github-stats-retry p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.skeleton-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.skeleton-line {
+  display: block;
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--surface2), #ffffff12, var(--surface2));
+  background-size: 200% 100%;
+  animation: github-stats-shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-label {
+  width: 62%;
+  height: 10px;
+}
+
+.skeleton-value {
+  width: 44%;
+  height: 26px;
+}
+
+.skeleton-detail {
+  width: 70%;
+  height: 8px;
+}
+
+@keyframes github-stats-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .github-stats-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .github-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .github-stat-card {
+    min-height: 120px;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .github-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .github-stat-card,
+  .skeleton-line {
+    animation: none;
+    transition: none;
+  }
+
+  .github-stat-card:hover {
+    transform: none;
+  }
+}
