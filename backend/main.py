@@ -16,13 +16,11 @@ from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 from openai import AsyncOpenAI
 from pydantic import BaseModel, EmailStr, Field
-from github_stats import router as github_stats_router
 
 load_dotenv()
 app = FastAPI(title="Shivansh Raghuvanshi Portfolio API", version="2.0.0", description="Portfolio assistant, safe SQL sandbox, and contact API.")
 origins = [value.strip() for value in os.getenv("FRONTEND_ORIGIN", "http://localhost:5173,http://127.0.0.1:5173").split(",") if value.strip()]
 app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=False, allow_methods=["GET", "POST"], allow_headers=["Content-Type"])
-app.include_router(github_stats_router)
 
 _requests: dict[str, deque[float]] = {}
 _RATE_WINDOW = 60
